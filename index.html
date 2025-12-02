@@ -1,0 +1,1310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoDinamica - Educación Ambiental</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Antonio:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root{
+            --verde-claro: #2E8B57;
+            --verde-fuerte: #1B5E20;
+            --amarillo: #FFC107;
+            --blanco: #FFFFFF;
+            --negro: #1a1a1a;
+            --gris-claro: #f5f5f5;
+            --gris-medio: #e0e0e0;
+            --sombra: rgba(0, 0, 0, 0.1);
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Antonio', sans-serif;
+            background-color: var(--blanco);
+            color: var(--negro);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: var(--blanco);
+            box-shadow: 0 2px 15px var(--sombra);
+            border-bottom: 3px solid var(--verde-claro);
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            animation: slideDown 0.6s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .logo {
+            font-size: 26px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--verde-fuerte);
+            letter-spacing: 1px;
+        }
+
+        nav .nav-links {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+        }
+
+        nav a {
+            color: var(--negro);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 5px 0;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--verde-claro);
+            transition: width 0.3s ease;
+            border-radius: 5px;
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        .hamburger {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--verde-claro);
+            font-size: 24px;
+            cursor: pointer;
+        }
+        .hero {
+            margin-top: 70px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(rgba(255, 255, 255, 0.627), rgba(255, 255, 255, 0.9)), 
+                        url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=2074&q=80');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            max-width: 900px;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.85);
+            border-radius: 5px;
+            box-shadow: 0 10px 30px var(--sombra);
+            animation: fadeInUp 0.8s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-size: clamp(36px, 8vw, 72px);
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: var(--verde-fuerte);
+            letter-spacing: 1px;
+        }
+
+        .hero-title-icons {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 10px;
+        }
+
+        .hero-title-icons i {
+            color: var(--verde-claro);
+            font-size: 48px;
+        }
+
+        .hero p {
+            font-size: 18px;
+            color: var(--negro);
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            font-family: 'Antonio', sans-serif;
+        }
+
+        .btn-primary {
+            background: var(--verde-claro);
+            color: var(--blanco);
+            box-shadow: 0 5px 15px rgba(46, 139, 87, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--blanco);
+            color: var(--verde-fuerte);
+            border: 2px solid green;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--verde-claro);
+            border: 2px solid var(--verde-claro);
+        }
+
+        .btn-secondary:hover {
+            background: var(--verde-claro);
+            color: var(--blanco);
+        }
+
+        .section {
+            padding: 80px 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 10;
+        }
+
+        .section-title {
+            font-size: clamp(32px, 6vw, 48px);
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 50px;
+            color: var(--verde-fuerte);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 100px;
+            height: 4px;
+            background: var(--verde-claro);
+            margin: 15px auto 0;
+            border-radius: 5px;
+        }
+
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: var(--blanco);
+            border: 1px solid var(--gris-medio);
+            border-radius: 5px;
+            padding: 30px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            animation: cardEntry 0.6s ease forwards;
+            opacity: 0;
+            box-shadow: 0 5px 15px var(--sombra);
+            text-align: center;
+        }
+
+        @keyframes cardEntry {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .card:nth-child(1) { animation-delay: 0.1s; }
+        .card:nth-child(2) { animation-delay: 0.2s; }
+        .card:nth-child(3) { animation-delay: 0.3s; }
+        .card:nth-child(4) { animation-delay: 0.4s; }
+
+        .card:hover {
+            border-color: var(--verde-claro);
+            box-shadow: 0 10px 25px rgba(46, 139, 87, 0.2);
+            transform: translateY(-10px);
+        }
+
+        .card-icon {
+            font-size: 48px;
+            color: var(--verde-claro);
+            margin-bottom: 15px;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover .card-icon {
+            transform: scale(1.15);
+        }
+
+        .card h3 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: var(--verde-fuerte);
+        }
+
+        .card p {
+            color: #555;
+            font-size: 15px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .slider-container {
+            background: var(--blanco);
+            border-radius: 5px;
+            overflow: hidden;
+            border: 1px solid var(--gris-medio);
+            margin-bottom: 40px;
+            position: relative;
+            box-shadow: 0 5px 15px var(--sombra);
+        }
+
+        .slider {
+            position: relative;
+            width: 100%;
+            height: 400px;
+            overflow: hidden;
+            background: var(--gris-claro);
+        }
+
+        .slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.8s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 2;
+            border-radius: 5px;
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            color: var(--blanco);
+            text-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+        }
+
+        .slide-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+            color: var(--amarillo);
+        }
+
+        .slide h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+            animation: slideInDown 0.6s ease;
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slide p {
+            font-size: 16px;
+            max-width: 600px;
+            animation: slideInUp 0.6s ease;
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .slider-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .dot.active {
+            background: var(--amarillo);
+            width: 30px;
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(255, 193, 7, 0.5);
+        }
+
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.6);
+            color: var(--amarillo);
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+            transition: all 0.3s ease;
+            font-size: 18px;
+        }
+
+        .slider-nav:hover {
+            background: var(--amarillo);
+            color: var(--negro);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .slider-nav.prev {
+            left: 15px;
+        }
+
+        .slider-nav.next {
+            right: 15px;
+        }
+
+        .detail-section {
+            background: var(--blanco);
+            border-radius: 5px;
+            border: 1px solid var(--gris-medio);
+            padding: 40px;
+            margin: 40px 0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 15px var(--sombra);
+        }
+
+        .detail-section:hover {
+            box-shadow: 0 10px 25px rgba(46, 139, 87, 0.15);
+            border-color: var(--verde-claro);
+        }
+
+        .detail-section.reveal {
+            opacity: 0;
+            transform: translateY(40px);
+        }
+
+        .detail-section.revealed {
+            opacity: 1;
+            transform: translateY(0);
+            animation: revealUp 0.6s ease;
+        }
+
+        @keyframes revealUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .detail-image {
+            width: 100%;
+            height: 300px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            border: 2px solid var(--gris-medio);
+            transition: all 0.4s ease;
+            overflow: hidden;
+        }
+
+        .detail-section:hover .detail-image {
+            transform: scale(1.05);
+            border-color: var(--verde-claro);
+        }
+
+        .detail-content h3 {
+            font-size: 28px;
+            color: var(--verde-fuerte);
+            margin-bottom: 15px;
+        }
+
+        .detail-content p {
+            color: #555;
+            margin-bottom: 15px;
+            font-size: 15px;
+            line-height: 1.8;
+        }
+
+        .highlight-box {
+            background: rgba(46, 139, 87, 0.1);
+            border-left: 4px solid var(--verde-claro);
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+        }
+
+        .highlight-box:hover {
+            background: rgba(46, 139, 87, 0.15);
+            transform: translateX(5px);
+        }
+
+        .highlight-box i {
+            color: var(--verde-claro);
+            margin-right: 8px;
+        }
+
+        .examples-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .example-card {
+            background: var(--blanco);
+            border: 1px solid var(--gris-medio);
+            border-radius: 5px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 3px 10px var(--sombra);
+        }
+
+        .example-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 10px 20px rgba(46, 139, 87, 0.2);
+            border-color: var(--verde-claro);
+        }
+
+        .example-card h4 {
+            color: var(--verde-fuerte);
+            margin-bottom: 10px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .example-card p {
+            color: #555;
+            font-size: 14px;
+        }
+
+        .problems-solutions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .problem-box, .solution-box {
+            background: var(--blanco);
+            border-radius: 5px;
+            padding: 25px;
+            border: 2px solid transparent;
+            transition: all 0.4s ease;
+            box-shadow: 0 5px 15px var(--sombra);
+        }
+
+        .problem-box {
+            border-color: #FF6B6B;
+        }
+
+        .problem-box:hover {
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.15);
+        }
+
+        .solution-box {
+            border-color: var(--verde-claro);
+        }
+
+        .solution-box:hover {
+            box-shadow: 0 8px 20px rgba(46, 139, 87, 0.2);
+            transform: translateY(-5px);
+        }
+
+        .problem-box h4, .solution-box h4 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+
+        .problem-box h4 {
+            color: #FF6B6B;
+        }
+
+        .solution-box h4 {
+            color: var(--verde-claro);
+        }
+
+        .problem-box p, .solution-box p {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+
+        .videos-section {
+            margin: 60px 0;
+        }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin-top: 30px;
+        }
+
+        .video-card {
+            background: var(--blanco);
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px var(--sombra);
+            transition: all 0.3s ease;
+            border: 1px solid var(--gris-medio);
+        }
+
+        .video-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 25px rgba(46, 139, 87, 0.2);
+            border-color: var(--verde-claro);
+        }
+
+        .video-thumbnail {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-thumbnail::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .video-card:hover .video-thumbnail::after {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .play-button {
+            position: relative;
+            z-index: 2;
+            background: var(--verde-claro);
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .video-card:hover .play-button {
+            transform: scale(1.1);
+            background: var(--verde-fuerte);
+        }
+
+        .video-content {
+            padding: 20px;
+        }
+
+        .video-content h4 {
+            color: var(--verde-fuerte);
+            margin-bottom: 10px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .video-content p {
+            color: #555;
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        .video-link {
+            display: inline-block;
+            color: var(--verde-claro);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .video-link:hover {
+            color: var(--verde-fuerte);
+            text-decoration: underline;
+        }
+
+        footer {
+            background: var(--verde-fuerte);
+            color: var(--blanco);
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            border-radius: 5px 5px 0 0;
+        }
+
+        footer p {
+            margin-bottom: 15px;
+            opacity: 0.9;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: var(--blanco);
+            font-size: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            color: var(--amarillo);
+            transform: scale(1.2);
+        }
+
+        @media (max-width: 768px) {
+            nav .nav-links {
+                display: none;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                background: var(--blanco);
+                flex-direction: column;
+                gap: 15px;
+                padding: 20px;
+                border-bottom: 1px solid var(--verde-fuerte);
+                box-shadow: 0 5px 15px var(--sombra);
+                border-radius: 0 0 5px 5px;
+            }
+
+            nav .nav-links.active {
+                display: flex;
+            }
+
+            .hamburger {
+                display: block;
+            }
+
+            .detail-section {
+                grid-template-columns: 1fr;
+                padding: 25px;
+            }
+
+            .problems-solutions {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 50px 20px;
+            }
+
+            .hero h1 {
+                font-size: 36px;
+            }
+
+            .hero-title-icons i {
+                font-size: 36px;
+            }
+
+            .slider {
+                height: 250px;
+            }
+
+            .slide h2 {
+                font-size: 24px;
+            }
+
+            .slide-icon {
+                font-size: 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo">
+            <i class="fas fa-leaf"></i> Ecosistemas-PROGRA
+        </div>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#biomasa">Biomasa</a></li>
+            <li><a href="#carbono">Ciclo del Carbono</a></li>
+            <li><a href="#energia">Energía</a></li>
+            <li><a href="#fotosintesis">Fotosíntesis</a></li>
+            <li><a href="#videos">Videos</a></li>
+            <li><a href="#problemas">Problemas</a></li>
+            <li><a href="#soluciones">Soluciones</a></li>
+        </ul>
+        <button class="hamburger" id="hamburger">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-title-icons">
+                <i class="fas fa-seedling"></i>
+                <h1>FERIA DE Ecosistemas</h1>
+                <i class="fas fa-seedling"></i>
+            </div>
+            <p>Descubre cómo funciona el ciclo de la vida: biomasa, energía, carbono y fotosíntesis. Entiende los problemas ambientales y sé parte de la solución.</p>
+            <div class="cta-buttons">
+                <a href="#biomasa" class="btn btn-primary">
+                    <i class="fas fa-arrow-down"></i> Explorar
+                </a>
+
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">Conceptos Fundamentales</h2>
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-tree"></i></div>
+                <h3>Biomasa</h3>
+                <p>La biomasa es la masa total de seres vivos en un área. Es la base de toda cadena alimentaria y almacena energía del Sol.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-recycle"></i></div>
+                <h3>Ciclo del Carbono</h3>
+                <p>El carbono circula entre la atmósfera, océanos y tierra. Es crucial para la vida y el equilibrio climático del planeta.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-bolt"></i></div>
+                <h3>Transferencia de Energía</h3>
+                <p>La energía fluye desde el Sol a través de productores y consumidores. Cada nivel pierde energía como calor.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon"><i class="fas fa-sun"></i></div>
+                <h3>Fotosíntesis</h3>
+                <p>Las plantas convierten luz solar, agua y CO₂ en glucosa y oxígeno. Es la base de la vida en la Tierra.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <h2 class="section-title">Explora en Profundidad</h2>
+        <div class="slider-container">
+            <div class="slider">
+                <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1448375240586-882707db888b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+                    <div class="slide-content">
+                        <div class="slide-icon"><i class="fas fa-globe-americas"></i></div>
+                        <h2>Biomasa</h2>
+                        <p>Total de organismos vivos en un ecosistema. Incluye plantas, animales, microorganismos y materia orgánica.</p>
+                    </div>
+                </div>
+                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?ixlib=rb-4.0.3&auto=format&fit=crop&w=2074&q=80');">
+                    <div class="slide-content">
+                        <div class="slide-icon"><i class="fas fa-recycle"></i></div>
+                        <h2>Ciclo del Carbono</h2>
+                        <p>El carbono se mueve: fotosíntesis → respiración → descomposición → emisiones → vuelta a la atmósfera.</p>
+                    </div>
+                </div>
+
+                <!-- Slide 3: Energía -->
+                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1466611653911-95081537e5b7?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');">
+                    <div class="slide-content">
+                        <div class="slide-icon"><i class="fas fa-bolt"></i></div>
+                        <h2>Transferencia de Energía</h2>
+                        <p>Productores (plantas) → Consumidores primarios → Secundarios → Terciarios. ¡Cada nivel pierde el 90% de energía!</p>
+                    </div>
+                </div>
+
+                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1471899236350-e3016bf1e69e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2071&q=80');">
+                    <div class="slide-content">
+                        <div class="slide-icon"><i class="fas fa-sun"></i></div>
+                        <h2>Fotosíntesis</h2>
+                        <p>6CO₂ + 6H₂O + luz → C₆H₁₂O₆ + 6O₂. ¡Las plantas alimentan el planeta!</p>
+                    </div>
+                </div>
+            </div>
+
+            <button class="slider-nav prev" id="prevSlide">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="slider-nav next" id="nextSlide">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+
+            <div class="slider-controls">
+                <span class="dot active" data-slide="0"></span>
+                <span class="dot" data-slide="1"></span>
+                <span class="dot" data-slide="2"></span>
+                <span class="dot" data-slide="3"></span>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="biomasa">
+        <h2 class="section-title"><i class="fas fa-tree"></i> Entendiendo la Biomasa</h2>
+
+        <div class="detail-section reveal">
+            <div class="detail-image" style="background-image: url('https://images.unsplash.com/photo-1476231682828-37e571bc172f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80');"></div>
+            <div class="detail-content">
+                <h3>¿Qué es la Biomasa?</h3>
+                <p>La biomasa es el peso total de todos los organismos vivos en un área específica. Es el componente vivo del ecosistema y la base de toda cadena alimentaria.</p>
+                <div class="highlight-box">
+                    <i class="fas fa-lightbulb"></i><strong> Dato importante:</strong> Una hectárea de bosque tropical puede contener más biomasa que 10 hectáreas de pradera.
+                </div>
+                <p><strong>Componentes de la biomasa:</strong> plantas, animales, hongos, bacterias y todos los microorganismos.</p>
+            </div>
+        </div>
+
+        <h3 style="margin-top: 40px; color: var(--verde-fuerte);"><i class="fas fa-list"></i> Ejemplos Actuales de Biomasa</h3>
+        <div class="examples-grid">
+            <div class="example-card">
+                <h4><i class="fas fa-forest"></i> Selvas Tropicales</h4>
+                <p>Contienen el 50% de la biomasa terrestre mundial. Son "pulmones verdes" cruciales para el clima global.</p>
+            </div>
+            <div class="example-card">
+                <h4><i class="fas fa-fish"></i> Océanos</h4>
+                <p>Los fitoplancton forman la base de biomasa marina. Producen el 50% del oxígeno que respiramos.</p>
+            </div>
+            <div class="example-card">
+                <h4><i class="fas fa-tractor"></i> Cultivos Agrícolas</h4>
+                <p>Hoy generamos biomasa controlada. El maíz, arroz y trigo alimentan a 8 mil millones de personas.</p>
+            </div>
+            <div class="example-card">
+                <h4><i class="fas fa-bug"></i> Insectos Polinizadores</h4>
+                <p>Abejas, mariposas y hormigas son biomasa clave. Sin ellas, colapsa la reproducción de plantas.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="carbono">
+        <h2 class="section-title"><i class="fas fa-recycle"></i> Ciclo del Carbono</h2>
+
+        <div class="detail-section reveal">
+            <div class="detail-image" style="background-image: url('https://images.unsplash.com/photo-1511497584788-876760111969?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');"></div>
+            <div class="detail-content">
+                <h3>El Viaje del Carbono</h3>
+                <p>El carbono es el elemento de la vida. Circula constantemente entre la atmósfera, los seres vivos y el suelo en un ciclo que ha durado miles de millones de años.</p>
+                <div class="highlight-box">
+                    <i class="fas fa-sync-alt"></i><strong> Ciclo Básico:</strong> CO₂ → Fotosíntesis → Carbono Orgánico → Respiración → CO₂
+                </div>
+                <p>Cada eslabón es esencial. Cuando alteramos este ciclo, alteramos el clima mundial.</p>
+            </div>
+        </div>
+
+        <h3 style="margin-top: 40px; color: var(--verde-fuerte);"><i class="fas fa-list"></i> Ejemplos Actuales del Ciclo del Carbono</h3>
+        <div class="examples-grid">
+            <div class="example-card">
+                <h4><i class="fas fa-industry"></i> Emisiones de CO₂</h4>
+                <p>2024: Se emiten 37 mil millones de toneladas de CO₂. Más del 80% proviene de combustibles fósiles.</p>
+            </div>
+            <div class="example-card">
+                <h4><i class="fas fa-temperature-high"></i> Calentamiento Global</h4>
+                <p>El CO₂ extra calienta la atmósfera. Hemos elevado 1.2°C en 150 años. Antes subía 0.01°C por siglo.</p>
+            </div>
+            <div class="example-card">
+                <h4><i class="fas fa-gas-pump"></i> Carbono Fósil</h4>
+                <p>Petróleo, carbón y gas son carbono enterrado hace millones de años. Al quemarlo, rompemos el ciclo.</p>
+            </div>
+            <div class="example-card">
+                <h4><i class="fas fa-water"></i> Acidificación Oceánica</h4>
+                <p>Los océanos absorben el 25% del CO₂. Esto acidifica el agua y daña corales y moluscos.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="energia">
+        <h2 class="section-title"><i class="fas fa-bolt"></i> Transferencia de Energía</h2>
+
+        <div class="detail-section reveal">
+            <div class="detail-image" style="background-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');"></div>
+            <div class="detail-content">
+                <h3>La Cadena Alimentaria</h3>
+                <p>La energía fluye en una sola dirección: del Sol hacia los seres vivos. Cada nivel alimentario captura y usa energía, pero siempre pierde la mayoría como calor.</p>
+                <div class="highlight-box">
+                    <i class="fas fa-chart-bar"></i><strong> Regla de los Niveles:</strong> Solo el 10% de energía se transfiere al siguiente nivel. El 90% se pierde.
+                </div>
+                <p>Por eso necesitamos 100 plantas para alimentar 10 herbívoros, que alimentan a 1 carnívoro.</p>
+            </div>
+        </div>
+
+        <h3 style="margin-top: 40px; color: var(--verde-fuerte);"><i class="fas fa-list"></i> Ejemplos Actuales de Transferencia de Energía</h3>
+        <div class="examples-grid">
+            <div class="example-card">
+                <h4><i class="fas fa-seedling"></i> Nivel Productor</h4>
+                <p>Las plantas capturan el 1% de la energía solar. Toda la biomasa animal depende de esto.</p>
+            </div>
+            <div class="example-card">
+                <h4><i class="fas fa-cow"></i> Herbívoros (Nivel 1)</h4>
+                <p>Una vaca come 30 kg de pasto para ganar 1 kg de peso. Consume 10% de energía disponible.</p>
+            </div>
+            <div class="example-card">
+                <h4><i class="fas fa-paw"></i> Carnívoros (Nivel 2)</h4>
+                <p>Un león debe cazar 100 herbívoros para sobrevivir un año. Muy pocas calorías disponibles.</p>
+            </div>
+            <div class="example-card">
+                <h4><i class="fas fa-user"></i> Humanos (Omnívoros)</h4>
+                <p>Comer plantas es 10 veces más eficiente que comer carne. La producción ganadera desperdicia energía.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="fotosintesis">
+        <h2 class="section-title"><i class="fas fa-sun"></i> La Fotosíntesis: Milagro de la Vida</h2>
+
+        <div class="detail-section reveal">
+            <div class="detail-image" style="background-image: url('https://images.unsplash.com/photo-1416879595882-3373a0480b5b?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80');"></div>
+            <div class="detail-content">
+                <h3>El Proceso Químico de la Vida</h3>
+                <p>La fotosíntesis es la reacción química más importante de la Tierra. Sin ella, no habría oxígeno, comida, ni nosotros.</p>
+                <div class="highlight-box">
+                    <i class="fas fa-atom"></i><strong> Ecuación:</strong> 6CO₂ + 6H₂O + luz solar → C₆H₁₂O₆ (glucosa) + 6O₂
+                </div>
+                <p>Las plantas usan la energía del Sol para convertir dióxido de carbono y agua en azúcar (alimento) y oxígeno.</p>
+            </div>
+        </div>
+
+        <h3 style="margin-top: 40px; color: var(--verde-fuerte);"><i class="fas fa-list"></i> Ejemplos Actuales de Fotosíntesis</h3>
+        <div class="examples-grid">
+            <div class="example-card">
+                <h4><i class="fas fa-tree"></i> Plantas Terrestres</h4>
+                <p>Un árbol produce oxígeno para 2 personas por año. Producen el 30% del O₂ mundial.</p>
+            </div>
+            <div class="example-card">
+                <h4><i class="fas fa-water"></i> Fitoplancton Marino</h4>
+                <p>Organismos microscópicos producen el 70% del oxígeno terrestre. Son invisibles pero vitales.</p>
+            </div>
+            <div class="example-card">
+                <h4><i class="fas fa-wheat-awn"></i> Cultivos de Alimentos</h4>
+                <p>El trigo, arroz y maíz usan fotosíntesis. Alimentan al 80% de la humanidad.</p>
+            </div>
+            <div class="example-card">
+                <h4><i class="fas fa-mountain"></i> Captura de Carbono</h4>
+                <p>Las plantas capturan CO₂ diario. Un bosque maduro captura 20 toneladas de CO₂/año.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="problemas">
+        <h2 class="section-title"><i class="fas fa-exclamation-triangle"></i> Problemas Ambientales Actuales</h2>
+
+        <div class="problems-solutions">
+            <div class="problem-box">
+                <h4><i class="fas fa-tree"></i> Deforestación Masiva</h4>
+                <p>Se pierden 10 millones de hectáreas de bosque al año. Destruimos biomasa, aumentamos CO₂ y eliminamos especies.</p>
+            </div>
+            <div class="problem-box">
+                <h4><i class="fas fa-fire"></i> Cambio Climático</h4>
+                <p>El CO₂ ha subido de 280 ppm a 420 ppm en 150 años. Altera ciclos naturales, causa sequías y extremos climáticos.</p>
+            </div>
+            <div class="problem-box">
+                <h4><i class="fas fa-fish"></i> Colapso de Ecosistemas Marinos</h4>
+                <p>Sobrepesca elimina especies clave. Acidificación daña arrecifes de coral. El 50% de la biomasa marina se ha perdido.</p>
+            </div>
+            <div class="problem-box">
+                <h4><i class="fas fa-bug"></i> Colapso de Insectos Polinizadores</h4>
+                <p>Poblaciones de abejas caen 30-50% en una década. Sin polinizadores, falla la fotosíntesis de muchas plantas.</p>
+            </div>
+            <div class="problem-box">
+                <h4><i class="fas fa-tint"></i> Contaminación del Agua</h4>
+                <p>Plásticos, pesticidas y químicos destruyen biomasa acuática. Interfieren con ciclos naturales y envenenan cadenas alimentarias.</p>
+            </div>
+            <div class="problem-box">
+                <h4><i class="fas fa-industry"></i> Producción Ganadera Intensiva</h4>
+                <p>El 14% de emisiones globales vienen de ganadería. Desperdicia energía, usa antibióticos y destruye hábitats.</p>
+            </div>
+        </div>
+
+        <div style="margin-top: 40px; background: rgba(255, 107, 107, 0.1); border: 2px solid #FF6B6B; border-radius: 5px; padding: 25px;">
+            <h3 style="color: #FF6B6B; margin-bottom: 15px;"><i class="fas fa-exclamation-circle"></i> Causa Común: Falta de Conciencia Humana</h3>
+            <p style="color: #555; margin-bottom: 10px;">
+                La mayoría de problemas ambientales vienen de nuestra ignorancia sobre estos ciclos. Consumimos sin saber:
+            </p>
+            <ul style="color: #555; margin-left: 20px;">
+                <li>Que cada producto tiene un costo ambiental invisible</li>
+                <li>Que nuestras decisiones alteran ciclos que tardaron millones de años en formarse</li>
+                <li>Que la naturaleza no puede adaptarse a cambios tan rápidos</li>
+                <li>Que los ecosistemas dañados hoy afectarán a nuestros hijos mañana</li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="section" id="soluciones">
+        <h2 class="section-title"><i class="fas fa-heart"></i> Soluciones y Acciones</h2>
+
+        <div class="problems-solutions">
+            <div class="solution-box">
+                <h4><i class="fas fa-tree"></i> Reforestación Masiva</h4>
+                <p>Plantar billones de árboles. Cada árbol captura CO₂, crea biomasa y restaura ecosistemas. Cuesta poco y funciona.</p>
+            </div>
+            <div class="solution-box">
+                <h4><i class="fas fa-solar-panel"></i> Energías Renovables</h4>
+                <p>Solar, eólica e hidroeléctrica rompen la dependencia de combustibles fósiles. Ya son más baratas que el carbón.</p>
+            </div>
+            <div class="solution-box">
+                <h4><i class="fas fa-leaf"></i> Dietas Vegetales</h4>
+                <p>Reducir carne un 50% baja emisiones 30%. Come más plantas, cultiva tu propio huerto si puedes.</p>
+            </div>
+            <div class="solution-box">
+                <h4><i class="fas fa-recycle"></i> Economía Circular</h4>
+                <p>Reutilizar, reparar, reciclar. Reducir residuos acelera ciclos naturales y evita contaminación.</p>
+            </div>
+            <div class="solution-box">
+                <h4><i class="fas fa-book"></i> Educación Ambiental</h4>
+                <p>Entiende estos ciclos. Comparte conocimiento. Las decisiones informadas generan cambios reales.</p>
+            </div>
+            <div class="solution-box">
+                <h4><i class="fas fa-handshake"></i> Políticas Globales</h4>
+                <p>Tratados internacionales, regulaciones, impuestos al carbono. Requiere voluntad política y presión social.</p>
+            </div>
+        </div>
+
+        <div style="margin-top: 40px; background: rgba(46, 139, 87, 0.1); border: 2px solid var(--verde-claro); border-radius: 5px; padding: 25px;">
+            <h3 style="color: var(--verde-claro); margin-bottom: 15px;"><i class="fas fa-check-circle"></i> Importancia de Comprender Estos Procesos</h3>
+            <p style="color: #555; margin-bottom: 10px; font-size: 16px;">
+                Entender biomasa, ciclo del carbono, transferencia de energía y fotosíntesis es PODER:
+            </p>
+            <ul style="color: #555; margin-left: 20px; font-size: 15px; line-height: 1.8;">
+                <li><strong>Tomar decisiones conscientes</strong> en consumo, transporte y alimentación</li>
+                <li><strong>Comprender el verdadero costo</strong> de productos y servicios</li>
+                <li><strong>Presionar gobiernos y empresas</strong> con argumentos científicos sólidos</li>
+                <li><strong>Educar a otros</strong> y crear movimientos de cambio real</li>
+                <li><strong>Adaptarse a futuros escenarios</strong> climáticos con estrategias basadas en ecología</li>
+                <li><strong>Innovar soluciones</strong> reales que no dañen más la naturaleza</li>
+            </ul>
+        </div>
+    </section>
+
+    <footer>
+        <h3><i class="fas fa-globe-americas"></i> Únete al Movimiento EcoDinamica</h3>
+        <p>La Tierra es nuestro hogar compartido. Entender cómo funciona es el primer paso para protegerla.</p>
+        <p><strong>Recuerda:</strong> Cada acción individual suma. Cada decisión consciente crea cambio.</p>
+        <p style="margin-top: 30px; font-size: 14px; opacity: 0.9;"><i class="far fa-copyright"></i>&copy; Programacion 3EV</p>
+    </footer>
+
+    <script>
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+
+        function showSlide(n) {
+            slides.forEach(slide => slide.classList.remove('active'));
+            dots.forEach(dot => dot.classList.remove('active'));
+
+            currentSlide = (n + slides.length) % slides.length;
+
+            slides[currentSlide].classList.add('active');
+            dots[currentSlide].classList.add('active');
+        }
+
+        document.getElementById('prevSlide').addEventListener('click', () => {
+            showSlide(currentSlide - 1);
+        });
+
+        document.getElementById('nextSlide').addEventListener('click', () => {
+            showSlide(currentSlide + 1);
+        });
+
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                showSlide(index);
+            });
+        });
+
+        setInterval(() => {
+            showSlide(currentSlide + 1);
+        }, 8000);
+
+        const revealElements = document.querySelectorAll('.detail-section');
+
+        function revealOnScroll() {
+            revealElements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('revealed');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll(); 
+        window.addEventListener('load', () => {
+            const cards = document.querySelectorAll('.card');
+            cards.forEach((card, index) => {
+                setTimeout(() => {
+                    card.style.animation = `cardEntry 0.6s ease forwards`;
+                }, index * 100);
+            });
+        });
+
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            const hero = document.querySelector('.hero');
+
+            if (hero) {
+                hero.style.backgroundPosition = `0 ${scrollY * 0.5}px`;
+            }
+        });
+
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            lastScroll = window.scrollY;
+
+            const nav = document.querySelector('nav');
+            if (lastScroll > 50) {
+                nav.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+            } else {
+                nav.style.boxShadow = '0 2px 15px rgba(0, 0, 0, 0.1)';
+            }
+        });
+
+        window.addEventListener('load', () => {
+            document.body.style.opacity = '1';
+        });
+    </script>
+</body>
+</html>
